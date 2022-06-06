@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   
+    <script>
+
+        // if (navigator.geolocation) { //check if geolocation is available
+        //         navigator.geolocation.getCurrentPosition(position => {
+        //         console.log(position);
+
+        //         fetch( `http://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitud}&sensor=false`)
+        //         .then(resp => resp.json())
+        //         .then( console.log )
+        //     });   
+        // }
+
+
+        let agent = navigator.userAgent;
+        // console.log(agent)
+
+        const getipClient = async function getIpClient() {
+        try {
+                const response = await axios.get('https://api.ipify.org?format=json');
+                console.log(response.data.ip);
+
+                if(response != ""){
+                    const response2 = await axios.get(`http://api.ipstack.com/${response.data.ip}?access_key=3bfbfa99887c028e3b8ff810dc69173e`);
+                    console.log(response2.data.country_name);
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        getipClient();
+
+
+        // Promise.all([getipClient(), getInfoClient() ])  // Ejecuta promesas en pararelo
+        // .then( respuestas => {
+        //     console.log( respuestas )
+        // })
+        // .catch(console.log);
+
+
+
+    </script>
+</body>
+</html>
